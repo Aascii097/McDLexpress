@@ -5,14 +5,15 @@ const db = require('../db/index')
 exports.getcart = (req, res) => {
   const cartInfo = req.body
   const sql = `
-    INSERT INTO cart (name, num, price) 
-    VALUES (?, ?, ?) 
+    INSERT INTO cart (name, num, price,imgurl) 
+    VALUES (?, ?, ?,?) 
     ON DUPLICATE KEY UPDATE 
       num = num + VALUES(num),
-      price = VALUES(price)
+      price = VALUES(price),
+      imgurl = VALUES(imgurl)
   `
 
-  db.query(sql, [cartInfo.name, cartInfo.num, cartInfo.price], (err, results) => {
+  db.query(sql, [cartInfo.name, cartInfo.num, cartInfo.price,cartInfo.imgurl], (err, results) => {
     // 1. 执行 SQL 语句失败
     if (err) return res.cc(err)
 
