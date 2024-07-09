@@ -33,13 +33,23 @@ app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/mcdl\//]
 //导入路由模块
 const router=require('./router/user')
 app.use('/mcdl',router)
+const detailrouter=require('./router/foodsdetail')
+app.use('/mcdl',detailrouter)
 // 导入并使用食物分类路由模块
 const cateRouter = require('./router/foodscategory')
-// 为食物分类的路由挂载统一的访问前缀 /my/article
 app.use('/mcdl/foods', cateRouter)
 const hamburgersRouter = require('./router/hamburger')
-// 为食物分类的路由挂载统一的访问前缀 /my/article
 app.use('/mcdl/foodsList', hamburgersRouter)
+const beverageRouter = require('./router/beverage')
+app.use('/mcdl/foodsList', beverageRouter)
+const snacksRouter = require('./router/snacks')
+app.use('/mcdl/foodsList', snacksRouter)
+const dessertsRouter = require('./router/desserts')
+app.use('/mcdl/foodsList', dessertsRouter)
+const breakfastRouter = require('./router/breakfast')
+app.use('/mcdl/foodsList', breakfastRouter)
+const addcartsRouter = require('./router/addcarts')
+app.use('/my/', addcartsRouter)
 // 错误中间件
 app.use(function (err, req, res, next) {
   // 数据验证失败
