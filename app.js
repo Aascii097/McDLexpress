@@ -50,6 +50,8 @@ const breakfastRouter = require('./router/breakfast')
 app.use('/mcdl/foodsList', breakfastRouter)
 const addcartsRouter = require('./router/addcarts')
 app.use('/my/', addcartsRouter)
+const getcartRouter = require('./router/getcart')
+app.use('/my/', getcartRouter)
 // 错误中间件
 app.use(function (err, req, res, next) {
   // 数据验证失败

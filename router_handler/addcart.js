@@ -5,15 +5,17 @@ const db = require('../db/index')
 exports.getcart = (req, res) => {
   const cartInfo = req.body
   const sql = `
-    INSERT INTO cart (name, num) 
-    VALUES (?, ?) 
-    ON DUPLICATE KEY UPDATE num = num + VALUES(num)
+    INSERT INTO cart (name, num, price) 
+    VALUES (?, ?, ?) 
+    ON DUPLICATE KEY UPDATE 
+      num = num + VALUES(num),
+      price = VALUES(price)
   `
-  
-  db.query(sql, [cartInfo.name, cartInfo.num], (err, results) => {
+
+  db.query(sql, [cartInfo.name, cartInfo.num, cartInfo.price], (err, results) => {
     // 1. 执行 SQL 语句失败
     if (err) return res.cc(err)
-    
+
     // 2. 插入或更新成功后，查询添加或更新后的数据
     const selectSql = 'SELECT * FROM cart WHERE name = ?'
     db.query(selectSql, [cartInfo.name], (err, results) => {
