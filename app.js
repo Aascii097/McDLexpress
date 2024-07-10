@@ -52,6 +52,10 @@ const addcartsRouter = require('./router/addcarts')
 app.use('/my/', addcartsRouter)
 const getcartRouter = require('./router/getcart')
 app.use('/my/', getcartRouter)
+const deletecartRouter = require('./router/deletecart')
+app.use('/my/', deletecartRouter)
+const updatecartRouter = require('./router/updatecart')
+app.use('/my/', updatecartRouter)
 // 错误中间件
 app.use(function (err, req, res, next) {
   // 数据验证失败
